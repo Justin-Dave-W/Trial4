@@ -1,6 +1,6 @@
 import React from 'react';
 import { Country } from '../types';
-import { MapPin, Factory, Timer, Landmark, Info } from 'lucide-react';
+import { MapPin, Factory, Timer, Users, Info, FileText } from 'lucide-react';
 
 interface CountryCardProps {
   country: Country;
@@ -23,10 +23,31 @@ export function CountryCard({ country, onClick, isSelected }: CountryCardProps) 
         <h3 className="text-xl font-semibold">{country.name}</h3>
       </div>
       
-      <div className="space-y-3">
+      <div className="space-y-4">
         <div>
           <div className="flex items-center gap-2">
             <Factory className="w-4 h-4 text-gray-500" />
+            <span className="text-gray-600">
+              {country.factoryCount?.toLocaleString() || 'N/A'} Factories
+              {country.id === 'philippines' && ' (Estimated)'}
+            </span>
+          </div>
+        </div>
+
+        <div>
+          <div className="flex items-center gap-2">
+            <Users className="w-4 h-4 text-gray-500" />
+            <div>
+              <span className="text-gray-600">
+                {country.workerCount?.toLocaleString() || 'N/A'} Workers
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div className="flex items-center gap-2">
+            <Timer className="w-4 h-4 text-gray-500" />
             <div>
               <span className="text-gray-600">
                 Labor Cost: ${country.laborCost.toFixed(2)}/day
@@ -41,7 +62,7 @@ export function CountryCard({ country, onClick, isSelected }: CountryCardProps) 
             <span>Source: {country.dataSources.laborCost}</span>
           </div>
         </div>
-        
+
         <div>
           <div className="flex items-center gap-2">
             <Timer className="w-4 h-4 text-gray-500" />
@@ -54,18 +75,19 @@ export function CountryCard({ country, onClick, isSelected }: CountryCardProps) 
             <span>Source: {country.dataSources.timeToMarket}</span>
           </div>
         </div>
-        
+
         <div>
-          <div className="flex items-center gap-2">
-            <Landmark className="w-4 h-4 text-gray-500" />
-            <span className="text-gray-600">
-              US Import Duty: {country.taxRate}%
-            </span>
+          <div className="flex items-center gap-2 mb-2">
+            <FileText className="w-4 h-4 text-gray-500" />
+            <span className="text-gray-600">Trade Agreements:</span>
           </div>
-          <div className="ml-6 mt-1 text-xs text-gray-400 flex items-center gap-1">
-            <Info className="w-3 h-3" />
-            <span>Source: {country.dataSources.taxRate}</span>
-          </div>
+          <ul className="ml-6 space-y-1">
+            {country.tradeAgreements.map((agreement, index) => (
+              <li key={index} className="text-sm text-gray-600">
+                • {agreement}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
 
