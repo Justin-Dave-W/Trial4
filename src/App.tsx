@@ -3,6 +3,7 @@ import { ExternalLink } from 'lucide-react';
 import { countries } from './data';
 import { CountryCard } from './components/CountryCard';
 import { ComparisonChart } from './components/ComparisonChart';
+import { TariffSection } from './components/TariffSection';
 import type { Country } from './types';
 
 function App() {
@@ -83,7 +84,7 @@ function App() {
         )}
 
         <div className="mb-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {countries.map((country) => (
               <CountryCard
                 key={country.id}
@@ -96,7 +97,7 @@ function App() {
         </div>
 
         {selectedCountries.length > 0 && (
-          <div>
+          <div className="mb-8">
             <h2 className="text-xl font-semibold text-gray-900 mb-4">
               Detailed US Textile Import Analysis
             </h2>
@@ -105,12 +106,16 @@ function App() {
         )}
 
         {selectedCountries.length === 0 && (
-          <div className="text-center py-12">
+          <div className="text-center py-12 mb-8">
             <p className="text-gray-500">
               Select countries above to see detailed textile import analysis for US market entry
             </p>
           </div>
         )}
+
+        <div className="mt-8">
+          <TariffSection />
+        </div>
       </main>
     </div>
   );
