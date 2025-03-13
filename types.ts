@@ -8,6 +8,8 @@ export interface Country {
   timeToMarket: number;
   taxRate: number;
   tradeAgreements: string[];
+  factoryCount: number;
+  workerCount: number;
   dataSources: {
     laborCost: string;
     infrastructure: string;
@@ -15,6 +17,7 @@ export interface Country {
     logistics: string;
     timeToMarket: string;
     taxRate: string;
+    workforceStats: string;
   };
   lastUpdated: {
     laborCost: string;
@@ -23,6 +26,7 @@ export interface Country {
     logistics: string;
     timeToMarket: string;
     taxRate: string;
+    workforceStats: string;
   };
 }
 
